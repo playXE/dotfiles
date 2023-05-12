@@ -1,0 +1,157 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passtrough": false,
+    "gtk-layer-shell": true,
+    "height": 0,
+    "modules-left": [
+        "clock",
+        // "cpu",
+        // "memory",
+        "custom/weather",
+	"custom/playerctl",
+        "wlr/workspaces"
+    ],
+    "modules-center": ["hyprland/window"],
+    "modules-right": [
+        "tray",
+        //"custom/updates",
+        "hyprland/language",
+	"pulseaudio",
+	"battery"
+        //"pulseaudio"
+        // "pulseaudio#microphone"
+    ],
+
+    "hyprland/window": {
+        "format": "{}"
+    },
+    "wlr/workspaces": {
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "active": "",
+            "default": ""
+          }
+    },
+    // "cpu": {
+    //     "interval": 10,
+    //     "format": " {}%",
+    //     "max-length": 10,
+    //     "on-click": ""
+    // },
+    // "memory": {
+    //     "interval": 30,
+    //     "format": " {}%",
+    //     "format-alt":" {used:0.1f}G",
+    //     "max-length": 10
+    // },
+    "custom/updates": {
+        "exec": "(paru -Qua) | wc -l",
+        "interval": 7200,
+        "format": " {}"
+    },
+    "hyprland/language": {
+	"min-length": 3
+    },
+    //*"custom/language": {
+    //    "exec": "cat /tmp/kb_layout",
+    //     "interval": 3,
+    //     "format": " {}",
+    //     "tooltip": false
+    //},*/
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "<span foreground='#928374'>{icon}</span> {capacity}%",
+        "format-charging": "<span foreground='#928374'></span> {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "custom/weather" : {
+        "tooltip" : true,
+        "format" : "{}",
+        "restart-interval" : 300,
+        "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
+        "return-type" : "json"
+    },
+    "tray": {
+        "icon-size": 13,
+        "tooltip": false,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{: %R   %d/%m}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },/*
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": " Muted",
+        "on-click": "pamixer -t",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },*/
+
+    "pulseaudio": {
+        "format": "<span foreground='#928374'>{icon}</span> {volume}%   {format_source}",
+        "format-bluetooth": "<span foreground='#928374'>{icon}</span> {volume}%   {format_source}",
+        "format-bluetooth-muted": "<span foreground='#928374'> {icon}</span>   {format_source}",
+        "format-muted": "<span foreground='#928374'></span>   {format_source}",
+        "format-source": "<span foreground='#928374'></span> {volume}%",
+        "format-source-muted": "<span foreground='#928374'></span>",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "env LIBGL_ALWAYS_SOFTWARE=1 helvum"
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "tooltip": false,
+        "format-source": " {volume}%",
+        "format-source-muted": " Muted",
+        "on-click": "pamixer --default-source -t",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
+    },
+    "custom/playerctl": {
+	"format": "{} ",
+	"return-type": "json",
+	"max-length": 40,
+	"exec": "~/.config/waybar/scripts/playerctl.sh",
+	"on-click": "playerctl play-pause",
+	"on-scroll-up": "playerctl position 3+",
+	"on-scroll-down": "playerctl position 3-"
+    }
+}
