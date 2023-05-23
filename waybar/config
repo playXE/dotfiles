@@ -3,7 +3,7 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher", "wlr/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "hyprland/language", "network", "pulseaudio",  "backlight", "battery", "custom/lock", "clock", "custom/power-menu"],
+    "modules-right": ["tray", "hyprland/language", "network", "pulseaudio",  "backlight", "battery", "clock", "custom/power-menu"],
     "wlr/workspaces": {
       "min-height": 10,
       "max-height": 20,
@@ -28,7 +28,15 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         */
    },
-
+    "custom/playerctl": {
+	"format": "{} ",
+	"return-type": "json",
+	"max-length": 40,
+	"exec": "~/.config/waybar/scripts/playerctl.sh",
+	"on-click": "playerctl play-pause",
+	"on-scroll-up": "playerctl position 3+",
+	"on-scroll-down": "playerctl position 3-"
+    },
     "cpu": {
       "interval": 10,
       "format": " {}%",
